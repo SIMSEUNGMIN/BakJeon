@@ -1,0 +1,48 @@
+import java.util.Scanner;
+
+public class Problem {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Scanner scanner = new Scanner(System.in);
+		
+		int count = 0;
+		int stdNum = 0;
+		int[] students = null;
+		double average = 0;
+		
+		count = scanner.nextInt();
+		
+		for(int i = 0; i < count; i++) {
+			stdNum = scanner.nextInt();
+			
+			students = new int[stdNum];
+			
+			for(int student = 0; student < stdNum; student++) {
+				students[student] = scanner.nextInt();
+			}
+		
+			average = getAverage(students);
+			
+			System.out.println(average);
+		}
+	}
+	
+	public static double getAverage(int[] students) {
+		
+		int sum = 0;
+		double average = 0;
+		
+		for(int i = 0; i < students.length; i++) {
+			sum += students[i];
+		}
+		
+		System.out.println(sum);
+		
+		average = sum / students.length;
+		
+		return average;
+		
+	}
+}
