@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Problem {
+public class Problem2 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -23,14 +23,24 @@ public class Problem {
 	
 	public static int checkTheYear(int M, int N, int x, int y) {
 		
-		int count = 1;
-		
 		int curX = 1;
 		int curY = 1;
 		
-		while((curX != M) || (curY != N)) {
+		int i = 1;
+		
+		while(i < M*N) {
+			
 			if((curX == x) && (curY == y)) {
-				return count;
+				return i;
+			}
+			
+			if(curX == x) {
+				curY = (curY + M)%N;
+
+				if(curY == 0) {
+					curY = N;
+				}
+				i += M;
 			}
 			else {
 				if((curX < M) && (curY < N)) {
@@ -46,10 +56,10 @@ public class Problem {
 					curY ++;
 				}
 				
-				count++;
+				i++;
 			}
 		}
-		
+
 		return -1;
 	}
 
