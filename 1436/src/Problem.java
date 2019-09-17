@@ -27,6 +27,8 @@ public class Problem {
 			
 			end += 1;
 			
+			//endSplit를 null 해도 배열은 여전히 살아있기 때문에 힢 영역에서 메모리를 잡아먹고 있다.
+			//이 떄문에 메모리 초과가 발생하게 되는 것이다.
 			endSplit = null;
 		}
 		
