@@ -27,6 +27,7 @@ public class Problem {
 			
 			end += 1;
 			
+			endSplit = null;
 		}
 		
 		System.out.println((end-1));
