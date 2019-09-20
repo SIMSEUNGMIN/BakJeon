@@ -14,7 +14,7 @@ public class Problem {
 
 	private static int factorial(int input) {
 		// TODO Auto-generated method stub
-		if(input == 1) {
+		if(input == 1 || input == 0) {
 			return 1;
 		}
 		
