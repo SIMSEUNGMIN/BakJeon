@@ -36,9 +36,9 @@ public class Problem {
 		
 		List<Point> tmpArray = new LinkedList<>();
 		
-		if((end - start + 1) <= 3) {
+		if((end - start) <= 3) {
 			
-			switch(end-start+1) {
+			switch(end-start) {
 				case 2:
 					//두 점 사이가 가장 최솟값
 					min = distance(array, 0, 1);
@@ -67,32 +67,33 @@ public class Problem {
 		else {
 			//배열을 반으로 쪼개서 왼쪽과 오른쪽으로 나눈 뒤
 			//왼쪽과 오른쪽에서 각각 나온 최솟값 중에서 더 작은 값을 반환함
-			min = Math.min(closestPair(array, 0, (end/2)), closestPair(array, (end/2), (end)));
-		}
-		
-		//구하고 나서 최솟값보다 작은 점들을 배열에서 제외
-		for(int i = start; i < end; i++) {
-			if((end/2 - min) <= array.get(i).x) {
-				tmpArray.add(array.get(i));
-			}
-		}
-		
-		//Y 오름차순 기준 sorting
-		Collections.sort(tmpArray, new PointComparatorY());
-		
-		//window 내부의 최단 거리를 구함
-		for(int one = 0; one < tmpArray.size()-1; one++) {
-			for(int two = one + 1; two < tmpArray.size(); two++) {
-				int tmp = tmpArray.get(one).y - tmpArray.get(two).y;
-				
-				if(tmp*tmp < min) {
-					int tmpD = distance(tmpArray, one, two);
-					if(tmpD < min) {
-						min = tmpD;
-					}
+			int mid = (start + end) /2;
+			min = Math.min(closestPair(array, start, mid), closestPair(array, mid, end));
+			
+			//구하고 나서 최솟값보다 작은 점들을 배열에서 제외
+			for(int i = start; i < end; i++) {
+				if(((end/2 - min) <= array.get(i).x) && (array.get(i).x <= (end/2 + min))) {
+					tmpArray.add(array.get(i));
 				}
-				else {
-					break;
+			}
+			
+			//Y 오름차순 기준 sorting
+			Collections.sort(tmpArray, new PointComparatorY());
+			
+			//window 내부의 최단 거리를 구함
+			for(int one = 0; one < tmpArray.size()-1; one++) {
+				for(int two = one + 1; two < tmpArray.size(); two++) {
+					int tmp = tmpArray.get(one).y - tmpArray.get(two).y;
+					
+					if(tmp*tmp < min) {
+						int tmpD = distance(tmpArray, one, two);
+						if(tmpD < min) {
+							min = tmpD;
+						}
+					}
+					else {
+						break;
+					}
 				}
 			}
 		}
