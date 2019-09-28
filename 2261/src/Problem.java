@@ -85,9 +85,16 @@ public class Problem {
 		//window 내부의 최단 거리를 구함
 		for(int one = 0; one < count-1; one++) {
 			for(int two = one + 1; two < count; two++) {
-				int tmp = distance(tmpArray, one, two);
-				if(tmp < min) {
-					min = tmp;
+				int tmp = tmpArray[one].getY() - tmpArray[two].getY();
+				
+				if(tmp*tmp < min) {
+					int tmpD = distance(tmpArray, one, two);
+					if(tmpD < min) {
+						min = tmpD;
+					}
+				}
+				else {
+					break;
 				}
 			}
 		}
@@ -134,7 +141,6 @@ public class Problem {
 		}	
 		
 	}
-
 }
 
 class Point{
