@@ -72,7 +72,7 @@ public class Problem {
 			
 			//구하고 나서 최솟값보다 작은 점들을 배열에서 제외
 			for(int i = start; i < end; i++) {
-				if(((end/2 - min) <= array.get(i).x) && (array.get(i).x <= (end/2 + min))) {
+				if(((end/2 - Math.sqrt(min)) <= array.get(i).x) && (array.get(i).x <= (end/2 + Math.sqrt(min)))) {
 					tmpArray.add(array.get(i));
 				}
 			}
