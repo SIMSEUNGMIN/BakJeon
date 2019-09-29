@@ -19,33 +19,33 @@ public class Problem {
 		for(int i = 0; i < input; i++) {
 			array[i] = Integer.toString(scanner.nextInt());
 		}
-	
+		
 		//Sort 실행
-		inversion(array);
+		inversion(array, 0, array.length);
 		
 		System.out.println(inversionCount);
 
 	}
 
-	private static String[] inversion(String[] array) {
+	private static String[] inversion(String[] array, int start, int end) {
 		
 		// TODO Auto-generated method stub
-		if(array.length == 1) {
-			return array;
+		if((end-start) == 1) {
+			String[] tmp = new String[]{array[start]};
+			return tmp;
 		}
 		else{
-			int mid = array.length / 2;
+			int mid = (end+start) / 2;
 			
-			String[] first = Arrays.copyOfRange(array, 0, mid);
-			String[] second = Arrays.copyOfRange(array, mid, array.length);
-			
-			return  mergeInversion(inversion(first), inversion(second));
+			String[] left = inversion(array, start, mid);
+			String[] right = inversion(array, mid, end);
+			return  mergeInversion(left, right);
 		}
 	}
 	
 	private static String[] mergeInversion(String[] first, String[] second) {
 		
-		String[] sortedList = new String[first.length + second.length];
+		String[] sortedList = new String[first.length+second.length];
 		
 		int sortedListCount = 0;
 	
@@ -79,6 +79,7 @@ public class Problem {
 				sortedList[sortedListCount++] = second[indexSecond++];
 				remindSecond--;
 			}
+			return sortedList;
 		}
 		//앞 배열이 남았을 경우
 		else if(remindFirst != 0 && remindSecond == 0){
@@ -86,10 +87,10 @@ public class Problem {
 				sortedList[sortedListCount++] = first[indexFirst++];
 				remindFirst--;
 			}
+			return sortedList;
 		}
 		
 		//System.out.println(Arrays.toString(sortedList));
-		
 		return sortedList;
 	}
 
