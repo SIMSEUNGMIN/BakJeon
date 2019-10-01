@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 public class Problem {
 	
-	static int inversionCount = 0;
+	static int inversionCount;
 	static int[] array;
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
@@ -18,6 +18,8 @@ public class Problem {
 		bf.readLine();
 
 		array = Arrays.stream((bf.readLine()).split(" ")).mapToInt(Integer::parseInt).toArray();
+		
+		inversionCount = 0;
 		
 		//Sort 실행
 		inversion(0, array.length);
@@ -38,7 +40,7 @@ public class Problem {
 	
 	private static void mergeInversion(int start, int mid, int end) {
 		
-		int[] sortedList = new int[array.length];
+		int[] sortedList = new int[end-start];
 		
 		int sortedListCount = 0;
 	
@@ -67,7 +69,7 @@ public class Problem {
 			}
 		}
 		//앞 배열이 남았을 경우
-		else if(indexFirst < mid){
+		else {
 			while(indexFirst != mid) {
 				sortedList[sortedListCount++] = array[indexFirst++];
 			}
@@ -78,7 +80,6 @@ public class Problem {
 		}
 		
 		//System.out.println(Arrays.toString(array));
-
 	}
 
 }
